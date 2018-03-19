@@ -1,0 +1,14 @@
+{
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "plugins": ["babel"],
+    "extends": ["airbnb", "prettier"],
+    "rules": {
+	    "babel/new-cap": 1,
+	    "babel/object-curly-spacing": 1,
+	    "babel/no-invalid-this": 1,
+	    "babel/semi": 1
+  	}		
+}
