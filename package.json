@@ -1,7 +1,7 @@
 {
-  "name": "grow-db",
+  "name": "grow-test",
   "version": "1.0.0",
-  "description": "Database Service for the Grow Ecosystem",
+  "description": "Test Runner for the Grow Ecosystem",
   "main": "index.js",
   "scripts": {
     "babel-node": "babel-node --presets=env",
@@ -19,9 +19,9 @@
   "author": "devstein",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/devstein/grow-db/issues"
+    "url": "https://github.com/jpugliesi/grow-test/issues"
   },
-  "homepage": "https://github.com/devstein/grow-db#readme",
+  "homepage": "https://github.com/jpugliesi/grow-test#readme",
   "dependencies": {
     "apollo-server-express": "^1.3.2",
     "aws-sdk": "^2.211.0",
