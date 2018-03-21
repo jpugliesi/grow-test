@@ -4,7 +4,6 @@ import { graphqlExpress, graphiqlExpress } from "apollo-server-express";
 import { makeExecutableSchema } from "graphql-tools";
 
 // https://www.apollographql.com/docs/apollo-server/
-import * as DB from "./database";
 
 // Database
 // Exposes DynamoDB schema 
