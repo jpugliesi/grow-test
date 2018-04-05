@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import { graphqlExpress, graphiqlExpress } from "apollo-server-express";
 import { makeExecutableSchema } from "graphql-tools";
-import { Client } from "pg";
+import { Sequelize } from "sequelize";
 
 // https://www.apollographql.com/docs/apollo-server/
 
@@ -92,20 +92,36 @@ if (process.env.NODE_ENV !== "production") {
   app.use("/graphiql", graphiqlExpress({ endpointURL: "/graphql" }));
 }
 
-const pg = new Client({
-  host     : "growdb.crpvvgq8rg3k.us-west-2.rds.amazonaws.com", //process.env.RDS_HOSTNAME,
-  database : "growdb",
-  user     : "dreamqueen", //process.env.RDS_USERNAME,
-  port     : 5432, //process.env.RDS_PASSWORD,
-  password : "420calipussy!" //process.env.RDS_PORT
-});
+const dbConfig = {
+  host: process.env.GROWDB_HOSTNAME,
+  database: process.env.GROWDB_DATABASE,
+  user: process.env.GROWDB_USERNAME,
+  port: process.env.GROWDB_PORT,
+  password: process.env.GROWDB_PASSWORD
+};
 
-pg.connect();
-
-pg.query('SELECT NOW()', (err, res) => {
-  console.log(err, res);
-  pg.end();
+const sequelize = new Sequelize({
+  database: dbConfig.database,
+  username: dbConfig.user,
+  password: dbConfig.password,
+  host: dbConfig.host,
+  port: dbConfig.port,
+  dialect: 'postgres',
+  pool: {
+      max: 5,
+      idle: 30000,
+      acquire: 60000,
+    },
 })
+
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 // Start the server
 app.listen(PORT, () => {

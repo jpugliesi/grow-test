@@ -33,7 +33,8 @@
     "lodash": "^4.17.5",
     "moment": "^2.20.1",
     "nodemon": "^1.17.1",
-    "pg": "latest"
+    "pg": "latest",
+    "sequelize": "^4.37.5"
   },
   "peerDependencies": {
     "prettier": "^1.11.1"
