@@ -63,3 +63,10 @@ typings/
 
 
 .DS_Store
+
+# grow-test specific
+## db crendentials
+credentials.sh
+
+# vim files
+*.swp

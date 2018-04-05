@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import { graphqlExpress, graphiqlExpress } from "apollo-server-express";
 import { makeExecutableSchema } from "graphql-tools";
+import { Client } from "pg";
 
 // https://www.apollographql.com/docs/apollo-server/
 
@@ -90,6 +91,21 @@ if (process.env.NODE_ENV !== "production") {
   // GraphiQL, a visual editor for queries
   app.use("/graphiql", graphiqlExpress({ endpointURL: "/graphql" }));
 }
+
+const pg = new Client({
+  host     : "growdb.crpvvgq8rg3k.us-west-2.rds.amazonaws.com", //process.env.RDS_HOSTNAME,
+  database : "growdb",
+  user     : "dreamqueen", //process.env.RDS_USERNAME,
+  port     : 5432, //process.env.RDS_PASSWORD,
+  password : "420calipussy!" //process.env.RDS_PORT
+});
+
+pg.connect();
+
+pg.query('SELECT NOW()', (err, res) => {
+  console.log(err, res);
+  pg.end();
+})
 
 // Start the server
 app.listen(PORT, () => {
